@@ -80,8 +80,24 @@ public class DbHelper extends SQLiteOpenHelper {
             return false;
     }
 
+    public Contact getContact(int id) {
+        SQLiteDatabase DB =this.getReadableDatabase(); //gets readable dataBase and pass it to DB
+        Cursor cursor = DB.rawQuery("SELECT * from Contact_TABLE WHERE ID = ?",new String[]{String.valueOf(id)});
+        Contact contact=new Contact();
+        if (cursor.moveToFirst()) {
+            contact.id=cursor.getInt(0);
+                  contact.name=  cursor.getString(1);
+                  contact.phone= cursor.getString(2);
+                  contact.city=cursor.getString(3);
+                  contact.contactCreated=cursor.getString(4);
+                  contact.imageResource= cursor.getInt(5);
+        }
+        cursor.close();
+        DB.close();
+        return contact;
+    }
+
     public ArrayList<Contact> GetAllContacts() {
-//        SQLiteDatabase DB = this.getWritableDatabase(); //gets writeable dataBase and pass it to DB
         SQLiteDatabase DB =this.getReadableDatabase();
         Cursor cursor = DB.rawQuery("SELECT * from Contact_TABLE",null);
         ArrayList<Contact> contactList=new ArrayList<>();

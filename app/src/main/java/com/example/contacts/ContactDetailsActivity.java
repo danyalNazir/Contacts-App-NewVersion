@@ -34,6 +34,8 @@ public class ContactDetailsActivity extends AppCompatActivity {
         DB =new DbHelper(this);
 
         Intent intent=getIntent();
+        Bundle bundle = getIntent().getExtras();
+        Integer id = bundle.getInt("id", -1);
 
         if(intent!=null)
         {
@@ -64,9 +66,6 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent intent = new Intent(ContactDetailsActivity.this, MainActivity.class);
 
-                    Bundle bundle = getIntent().getExtras();
-                    Integer id = bundle.getInt("id", -1);
-
                    Boolean checkDeleteData= DB.DeleteContact(id);
                     if(checkDeleteData==true)
                         Toast.makeText(ContactDetailsActivity.this,"Contact Deleted!",Toast.LENGTH_SHORT).show();
@@ -74,6 +73,15 @@ public class ContactDetailsActivity extends AppCompatActivity {
                         Toast.makeText(ContactDetailsActivity.this,"Contact Deletion Failed!",Toast.LENGTH_SHORT).show();
 
                     startActivity(intent);
+                }
+            });
+            buttonUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent newIntent = new Intent(ContactDetailsActivity.this, UpdateContactActivity.class);
+                    newIntent.putExtra("id",id);
+
+                    startActivity(newIntent);
                 }
             });
         }

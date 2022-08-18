@@ -46,6 +46,15 @@ public class Contact implements Serializable {
         this.imageResource = imageResource;
     }
 
+    public Contact() {
+        this.id=null;
+        this.name = null;
+        this.phone = null;
+        this.city = null;
+        this.contactCreated = null;
+        this.imageResource = -1;
+    }
+
     public Contact(Integer id,String name, String phone, String city, String contactCreated, Integer imageResource) {
         this.id=id;
         this.name = name;
@@ -54,11 +63,5 @@ public class Contact implements Serializable {
         this.contactCreated = contactCreated;
         this.imageResource = imageResource;
     }
-//    public Contact(String name, String phone, String city, String contactCreated) {
-//        this.name = name;
-//        this.phone = phone;
-//        this.city = city;
-//        this.contactCreated = contactCreated;
-//        this.imageResource = imageResource;
-//    }
+
 }
